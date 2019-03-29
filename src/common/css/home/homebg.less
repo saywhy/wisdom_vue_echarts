@@ -1,0 +1,528 @@
+@home_top_h: 1161px;
+@home_top_item_m_r: 99px;
+@home_top_item_w: 1785px;
+@home_top_mid_p: 30px;
+@home_top_left_sx: 75px;
+@home_top_left_zy: 90px;
+@title_w: 429px;
+@title_h: 90px;
+@title_span_fs: 48px;
+@title_span_l: 9px;
+
+.home {
+  width: 100%;
+
+  .home_top {
+    height: @home_top_h;
+    margin-bottom: 60px;
+    overflow: hidden;
+
+    //   border: 1px solid red;
+    .item {
+      width: @home_top_item_w;
+      height: 100%;
+      float: left;
+      margin-right: @home_top_item_m_r;
+      background: url(../../../assets/img/1/item_bg.png) no-repeat 0px 0px;
+      background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+
+      .container {
+        width: 100%;
+
+        .title {
+          background: url(../../../assets/img/1/title_erji.png) no-repeat 0px
+            0px;
+          background-size: 100% 100%;
+          -moz-background-size: 100% 100%;
+          width: @title_w;
+          height: @title_h;
+          margin-bottom: @home_top_left_sx;
+
+          span {
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+            font-size: @title_span_fs;
+            letter-spacing: @title_span_l;
+            height: @title_h;
+            width: 100%;
+            font-weight: 500;
+            line-height: @title_h;
+          }
+        }
+
+        .table_container_left {
+          width: 100%;
+          height: 100%;
+
+          table {
+            width: 100%;
+            border: 1px solid #29c4ec;
+
+            tr {
+              height: 120px;
+              width: 100%;
+              border-bottom: 1px solid #29c4ec;
+              text-align: center;
+              line-height: 120px;
+              font-size: 60px;
+
+              .td_title {
+                width: 25%;
+                border-right: 1px solid #29c4ec;
+                font-size: 60px;
+                color: #fff;
+              }
+
+              .td_content {
+                width: 75%;
+                font-size: 60px;
+                color: #fff;
+              }
+            }
+
+            tr:nth-child(even) {
+              background-color: rgba(36, 211, 253, 0.24);
+            }
+          }
+        }
+
+        .table_container_right {
+          width: 100%;
+          height: 100%;
+
+          table {
+            width: 100%;
+            border: 1px solid #29c4ec;
+
+            tr {
+              height: 120px;
+              width: 100%;
+              border-bottom: 1px solid #29c4ec;
+              text-align: center;
+              line-height: 120px;
+              font-size: 60px;
+
+              .td_title {
+                width: 75%;
+                border-right: 1px solid #29c4ec;
+                font-size: 60px;
+                color: #fff;
+              }
+
+              .td_content {
+                width: 25%;
+                font-size: 60px;
+                color: #fff;
+              }
+            }
+
+            tr:nth-child(even) {
+              background-color: rgba(36, 211, 253, 0.24);
+            }
+          }
+        }
+      }
+    }
+
+    .home_top_left {
+      padding: @home_top_left_sx @home_top_left_sx;
+    }
+
+    .home_top_mid {
+      padding: @home_top_mid_p;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .home_top_right {
+      margin-right: 0;
+      padding: @home_top_left_sx @home_top_left_sx;
+    }
+  }
+
+  .home_bom {
+    width: 100%;
+
+    .home_bom_title {
+      width: 678px;
+      height: 162px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: url(../../../assets/img/1/title_mid.png) no-repeat 0px 0px;
+      background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      text-align: center;
+      font-size: 72px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 162px;
+      letter-spacing: 6px;
+      margin-bottom: 45px;
+    }
+
+    .home_bom_content {
+      height: 1020px;
+      margin-top: 210px;
+      background: url(../../../assets/img/1/item_bg.png) no-repeat 0px 0px;
+      background-size: 100% 100%;
+      -moz-background-size: 100% 100%;
+      padding: @home_top_left_sx @home_top_left_sx;
+    }
+
+    .home_bom_item {
+      float: left;
+      width: @home_top_item_w;
+      position: relative;
+    }
+
+    .home_bom_left {
+      margin-right: @home_top_item_m_r;
+
+      .home_bom_content_left {
+        width: 100%;
+        //   border: 1px solid red;
+        position: relative;
+
+        .line {
+          margin: 45px 0px;
+
+          img {
+            width: 100%;
+            height: 12px;
+          }
+        }
+
+        .home_bom_left_top {
+          height: 150px;
+
+          img {
+            width: 150px;
+            height: 150px;
+            margin-right: 18px;
+            float: left;
+          }
+
+          .content_left_text {
+            float: left;
+
+            .text_top {
+              font-size: 54px;
+              background: linear-gradient(to bottom, #fff 0%, #8ae1fd 100%);
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              text-fill-color: transparent;
+              text-align: center;
+            }
+
+            .text_bom {
+              border: 1px solid rgba(46, 241, 253, 0.5);
+              border-radius: 9px;
+              font-size: 36px;
+              padding: 0px 15px;
+              margin-right: 15px;
+
+              span {
+                font-size: 36px;
+              }
+            }
+          }
+
+          .content_left {
+            float: left;
+          }
+
+          .content_mid {
+            position: absolute;
+            left: 52%;
+            transform: translateX(-50%);
+          }
+
+          .content_right {
+            float: right;
+          }
+        }
+
+        //   折线图-环境监测
+        #environment {
+          width: 100%;
+          height: 690px;
+        }
+      }
+    }
+
+    .home_bom_mid {
+      margin-right: @home_top_item_m_r;
+
+      .home_bom_content_mid {
+        .home_bom_mid_top {
+          height: 150px;
+
+          img {
+            width: 150px;
+            height: 150px;
+            margin-right: 18px;
+            float: left;
+          }
+
+          .content_mid_text {
+            float: left;
+
+            .text_top {
+              font-size: 54px;
+              background: linear-gradient(to bottom, #fff 0%, #8ae1fd 100%);
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              text-fill-color: transparent;
+              text-align: center;
+            }
+
+            .text_bom {
+              margin-right: 15px;
+              //   border: 1px solid rgba(46, 241, 253, 0.5);
+              border-radius: 9px;
+              font-size: 36px;
+              padding: 0px 15px;
+
+              span {
+                font-size: 36px;
+              }
+            }
+          }
+
+          .content_left {
+            float: left;
+          }
+
+          .content_right {
+            float: right;
+            height: 150px;
+
+            p {
+              width: 100%;
+              height: 50%;
+              padding: 12px;
+
+              .span_color {
+                display: inline-block;
+                width: 90px;
+                height: 48px;
+                margin-right: 30px;
+                border-radius: 6px;
+              }
+
+              .span_color_top {
+                background-color: #80f4fe;
+              }
+
+              .span_color_bom {
+                background-color: #feeb90;
+              }
+
+              .span_text {
+                font-size: 42px;
+                vertical-align: bottom;
+                color: #fff;
+              }
+            }
+          }
+        }
+
+        .attendance {
+          //   柱状图-考勤
+          overflow-x: auto;
+          // #attendance {
+          //   width: 600px;
+          //   height: 230px;
+          // }
+        }
+
+        .attendance::-webkit-scrollbar-track-piece {
+          //滚动条凹槽的颜色，还可以设置边框属性
+          border-radius: 10px;
+          background-color: rgba(7, 48, 95, 0.88);
+        }
+
+        .attendance::-webkit-scrollbar {
+          /*滚动条整体样式*/
+          //滚动条的宽度
+          width: 15px;
+          height: 3px;
+        }
+
+        .attendance::-webkit-scrollbar-thumb {
+          //滚动条的设置
+          background-color: #75c1ef;
+          border-radius: 30px;
+          height: 72px;
+          opacity: 0.73;
+        }
+
+        .attendance::-webkit-scrollbar-thumb:hover {
+          background-color: #bbb;
+        }
+      }
+    }
+
+    //   右边
+    .home_bom_right {
+      width: @home_top_item_w;
+
+      .home_bom_content_right {
+        //   border: 1px solid red;
+        height: 900px;
+        overflow-y: auto;
+
+        .content_right_item {
+          height: 450px;
+
+          // border: 1px solid green;
+          .content_right_item_top {
+            //   border: 1px solid red;
+            height: 75px;
+            position: relative;
+
+            p {
+              font-size: 42px;
+              padding-left: 15px;
+            }
+
+            img {
+              position: absolute;
+              bottom: 0;
+              width: 100%;
+              height: 24px;
+            }
+          }
+
+          .content_right_item_bom {
+            //   border: 1px solid red;
+            height: 375px;
+            background: url(../../../assets/img/1/dt_bg.png) no-repeat 0px 0px;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+
+            .item_bom_left {
+              float: left;
+              width: 255px;
+              height: 100%;
+              // border: 1px solid red;
+              position: relative;
+
+              img {
+                width: 270px;
+                height: 270px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+            }
+
+            .item_bom_mid {
+              float: left;
+              width: 435px;
+              height: 100%;
+              // border: 1px solid red;
+              padding-top: 12px;
+              margin-right: 120px;
+
+              p {
+                font-size: 30px;
+                margin-bottom: 9px;
+                height: 48px;
+                line-height: 48px;
+              }
+
+              .item_bom_mid_left {
+                float: left;
+                text-align: right;
+              }
+
+              .item_bom_mid_mid {
+                float: left;
+
+                p {
+                  margin-right: 15px;
+                  margin-left: 15px;
+                  width: 180px;
+                  color: #a6f4fc;
+                  text-align: center;
+                  background: url(../../../assets/img/1/dt_num_bg.png) no-repeat
+                    0px 0px;
+                  background-size: 100% 100%;
+                  -moz-background-size: 100% 100%;
+                }
+              }
+
+              .item_bom_mid_right {
+                float: left;
+              }
+            }
+
+            .item_bom_right {
+              width: 795px;
+              float: left;
+              height: 100%;
+              text-align: left;
+
+              p {
+                font-size: 30px;
+                height: 66px;
+                text-align: center;
+
+                span {
+                  width: 60px;
+                  height: 45px;
+                  font-size: 30px;
+                  padding: 0 6px;
+                  background: url(../../../assets/img/1/weigui_num_bg.png)
+                    no-repeat 0px 0px;
+                  background-size: 100% 100%;
+                  -moz-background-size: 100% 100%;
+                  color: #fee15a;
+                }
+              }
+
+              .item_bom_right_echarts {
+                height: 300px;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      .home_bom_content_right::-webkit-scrollbar-track-piece {
+        //滚动条凹槽的颜色，还可以设置边框属性
+        border-radius: 30px;
+        background-color: rgba(7, 48, 95, 0.88);
+      }
+
+      .home_bom_content_right::-webkit-scrollbar {
+        /*滚动条整体样式*/
+        //滚动条的宽度
+        width: 15px;
+        height: 3px;
+      }
+
+      .home_bom_content_right::-webkit-scrollbar-thumb {
+        //滚动条的设置
+        background-color: #75c1ef;
+        border-radius: 30px;
+        height: 72px;
+        opacity: 0.73;
+      }
+
+      .home_bom_content_right::-webkit-scrollbar-thumb:hover {
+        background-color: #bbb;
+      }
+    }
+  }
+}
