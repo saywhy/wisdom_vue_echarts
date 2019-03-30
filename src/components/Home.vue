@@ -19,7 +19,11 @@
                 </div>
             </div>
             <div class="home_top_mid item">
-                <img src="../assets/img/1/mid_bg.jpeg" alt="">
+                <!-- <img src="../assets/img/1/mid_bg.jpeg" alt=""> -->
+                <img :src="picUrl" alt="">
+                <!-- <div class="img_box"> -->
+                <!-- <img class="img_box" src="www.biaima.com.cn/bs_test/index/picture/Building.png" alt=""> -->
+                <!-- </div> -->
             </div>
             <div class="home_top_right item">
                 <div class="container">
@@ -93,21 +97,27 @@
                                 <img src="../assets/img/1/attendance.png" alt="">
                                 <div class="content_mid_text">
                                     <p class="text_top">员工考勤</p>
-                                    <span class="text_bom">56/65人</span>
-                                    <span class="text_bom">92% 到勤率</span>
+                                    <span class="text_bom">
+                                        <span> {{members.actualNumsTotal}}</span>
+                                        /
+                                        <span>{{members.objNumsTotal}}</span>
+                                        人</span>
+                                    <span class="text_bom">
+                                        <span>{{members.attendance | numFilter}}</span>
+                                        % 到勤率</span>
                                 </div>
                             </div>
                             <div class="content_right">
                                 <p>
                                     <span class="span_color span_color_top"></span>
                                     <span class="span_text">
-                                        xxxxxx
+                                        应到人数
                                     </span>
                                 </p>
                                 <p>
                                     <span class="span_color span_color_bom"></span>
                                     <span class="span_text">
-                                        xxxxxx
+                                        实到人数
                                     </span>
                                 </p>
                             </div>
@@ -174,6 +184,7 @@
                 </div>
             </div>
         </div>
+        <!-- <img src="www.biaima.com.cn/bs_test/index/picture/Building.png" width="200" height="200" alt=""> -->
     </div>
 </template>
 <style  lang="less">
@@ -187,9 +198,13 @@
 
 <script>
 var echarts = require('echarts');
+// import 'www.biaima.com.cn/bs_test/index/picture/Building.png';
 export default {
     components: {
-
+        // Vue.component('cdn-img', {
+        //   props: ['src'],
+        //   template: `<img :src="'http://awesome.cdn.com/' + src" /> `
+        // })
     },
     name: 'home',
     data() {
@@ -199,31 +214,10 @@ export default {
             members: [],
             dynamic: [],
             safe: [],
-            table_right: [
-                { 'name': '施工一区-xxxxxxx', 'time': '2019-01-21' },
-                { 'name': '施工二区-xxxxxxx', 'time': '2019-01-21' },
-                { 'name': '施工三区-xxxxxxx', 'time': '2019-01-21' },
-                { 'name': '施工四区-xxxxxxx', 'time': '2019-01-21' },
-                { 'name': '施工五区-xxxxxxx', 'time': '2019-01-21' },
-                { 'name': '施工六区-xxxxxxx', 'time': '2019-01-21' },
-                { 'name': '施工七区-xxxxxxx', 'time': '2019-01-21' }
-            ],
-            attendanceData: [
-                {
-                    name: '一分公司',
-                    time: ['02-10', '02-11', '02-12', '02-13', '02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20'],
-                    value: [90, 100, 100, 86, 73, 68, 100, 100, 100, 86, 73]
-                },
-                {
-                    name: '二分公司',
-                    time: ['02-10', '02-11', '02-12', '02-13', '02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20'],
-                    value: [80, 92, 95, 82, 100, 93, 84, 92, 95, 82, 100]
-                },
-            ],
+            picUrl: ""
         }
     },
     mounted() {
-        this.attendance_echarts();
         // 获取工程简介
         this.abstract_getData();
         // 环境监测
@@ -231,11 +225,19 @@ export default {
         // 劳动力情况
         this.members_getData();
         // 主图片
-        // this.mainPicture_getData();
+        this.mainPicture_getData();
         // 工程动态
         this.dynamic_getData();
         // 安全数据
         this.safe_getData();
+    },
+    filters: {
+        numFilter(value) {
+            // 截取当前数据到小数点后两位
+            let realVal = parseFloat(value).toFixed(2)
+            // num.toFixed(2)获取的是字符串
+            return parseFloat(realVal)
+        }
     },
     methods: {
         handleSelect(key, keyPath) {
@@ -261,7 +263,7 @@ export default {
                 grid: {
                     left: '3%',
                     right: '3%',
-                    bottom: '6%',
+                    bottom: '3%',
                     top: '15%',
                     containLabel: true
                 },
@@ -277,6 +279,8 @@ export default {
                     axisLabel: {
                         color: '#7C97AD',
                         interval: 0,
+                        rotate: -40,
+                        margin: 25,
                         textStyle: {
                             align: 'center',
                             baseline: 'middle'
@@ -288,8 +292,7 @@ export default {
                             color: '#7C97AD'
                         },
                     },
-                    data: ['08:10', '09:10', '10:10', '11:10', '12:10', '13:10', '14:10',
-                        '15:10', '16:10', '17:10', '18:10', '19:10', '20:10', '21:10',]
+                    data: this.environment.timeAxis
                 },
                 yAxis: {
                     type: 'value',
@@ -333,18 +336,6 @@ export default {
         },
         // 柱状图-考勤
         attendance_echarts() {
-            // if (window.innerWidth) {
-            //     console.log(window.innerWidth);
-            //     if (window.innerWidth < 1930) {
-            //         console.log(1920);
-
-            //         document.getElementById('attendance').style.height = '230px';
-            //         document.getElementById('attendance').style.width = this.attendanceData[0].time.length * 100 + 'px';
-            //     } else {
-            //         mychart.setOption(option, true);
-            //         console.log(1930);
-            //     }
-            // }
             var mychart = echarts.init(document.getElementById("attendance"));
             var option = {
                 tooltip: {
@@ -383,7 +374,7 @@ export default {
                                 color: '#7C97AD'
                             },
                         },
-                        data: this.attendanceData[0].time
+                        data: this.members.workerTypes
                     }
                 ],
                 yAxis: [
@@ -410,7 +401,7 @@ export default {
                 ],
                 series: [
                     {
-                        name: this.attendanceData[0].name,
+                        name: '',
                         type: 'bar',
                         itemStyle: {
                             normal: {
@@ -425,10 +416,10 @@ export default {
 
                             }
                         },
-                        data: this.attendanceData[0].value
+                        data: this.members.objNums
                     },
                     {
-                        name: this.attendanceData[1].name,
+                        name: '',
                         type: 'bar',
                         itemStyle: {
                             normal: {
@@ -442,7 +433,7 @@ export default {
                                 }
                             }
                         },
-                        data: this.attendanceData[1].value
+                        data: this.members.actualNums
                     }
                 ]
             };
@@ -495,7 +486,7 @@ export default {
                                     color: '#7C97AD'
                                 },
                             },
-                            data: ['08:10', '09:10', '10:10', '11:10', '12:10', '13:10', '14:10', '15:10', '16:10', '17:10', '18:10', '19:10', '20:10', '21:10']
+                            data: item.timeAxis
                         },
                         yAxis: {
                             type: 'value',
@@ -551,7 +542,6 @@ export default {
         abstract_getData() {
             this.$axios.get('/index/abstract')
                 .then(response => {
-
                     if (response.data.res == 'SUCCESS') {
                         this.abstract = [
                             { 'name': '建筑总面积', 'content': response.data.data.totalArea },
@@ -586,11 +576,20 @@ export default {
             this.$axios.get('/index/members')
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
-                        console.log(response.data.data);
+                        // console.log(response.data.data);
                         this.members = response.data.data;
-                        // response.data.data.map(item => {
-
-                        // })
+                        this.attendance_echarts();
+                        var objNumsTotal = 0;
+                        var actualNumsTotal = 0;
+                        this.members.objNums.map(item => {
+                            objNumsTotal += item;
+                        })
+                        this.members.actualNums.map(item => {
+                            actualNumsTotal += item;
+                        })
+                        this.members.objNumsTotal = objNumsTotal;
+                        this.members.actualNumsTotal = actualNumsTotal;
+                        this.members.attendance = (actualNumsTotal / objNumsTotal) * 100;
                     }
                 })
                 .catch(error => {
@@ -602,18 +601,13 @@ export default {
             this.$axios({
                 method: "get",
                 url: '/index/mainPicture',
-                // headers: headers('application/x-download'),
-                responseType: 'blob',
             })
-                // this.$axios.get('/index/mainPicture')
                 .then(response => {
-                    let url = window.URL.createObjectURL(response.data)
-                    let link = document.createElement('a')
-                    link.style.display = 'none'
-                    link.href = url
-                    link.setAttribute('download', 'product.png')
-                    document.body.appendChild(link)
-                    link.click()
+                    if (response.data.res == 'SUCCESS') {
+                        console.log(response.data.data);
+                        this.picUrl = 'data:image/png;base64,' + response.data.data.picB64;
+                        console.log(this.picUrl);
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -624,7 +618,6 @@ export default {
             this.$axios.get('/index/dynamic')
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
-                        console.log(response.data.data);
                         this.dynamic = response.data.data;
                     }
                 })
@@ -637,18 +630,19 @@ export default {
             this.$axios.get('/index/safe')
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
-                        // console.log(response.data.data);
                         this.safe = response.data.data;
                         this.safe.map((item, index) => {
                             item.id = 'dt' + index;
                         })
+                        // console.log(response.data.data);
                         this.safe_echarts();
                     }
                 })
                 .catch(error => {
                     console.log(error);
                 })
-        }
+        },
+
     }
 }
 </script>
