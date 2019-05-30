@@ -16,13 +16,13 @@
                             <th>已接受交底人</th>
                             <th>未接受交底人</th>
                         </tr>
-                        <tr v-for="(item,index) in DiscloseData" class="tbody_tr" :class="tableRowClassName(index)">
+                        <tr v-for="(item,index) in safeTell" class="tbody_tr" :class="tableRowClassName(index)">
                             <td>{{index+1}}</td>
                             <td>{{item.name}}</td>
-                            <td>{{item.profession}}</td>
+                            <td>{{item.major}}</td>
                             <td>{{item.state}}</td>
-                            <td>{{item.accepted}}</td>
-                            <td>{{item.unaccepted}}</td>
+                            <td>{{item.completeNum}}</td>
+                            <td>{{item.unfinishedNum}}</td>
                         </tr>
                     </table>
                 </div>
@@ -37,10 +37,10 @@
                         </div>
                         <!-- 柱状图 -->
                         <div class="echarts_title">
-                            <span class="echarts_title_left">单位：XXXX</span>
+                            <span class="echarts_title_left">单位：次</span>
                             <span class="echarts_title_right">
                                 <span class="echarts_title_right_left"></span>
-                                <span class="echarts_title_right_right">XXXX</span>
+                                <span class="echarts_title_right_right">交底次数</span>
                             </span>
                         </div>
                         <div id="count">
@@ -73,7 +73,7 @@
                             <th>整改时间</th>
                             <th>问题类型</th>
                         </tr>
-                        <tr v-for="(item,index) in RectificationData" class="tbody_tr" :class="tableRowClassName(index)">
+                        <tr v-for="(item,index) in safeReform" class="tbody_tr" :class="tableRowClassName(index)">
                             <td>{{index+1}}</td>
                             <td>{{item.name}}</td>
                             <td>{{item.state}}</td>
@@ -121,9 +121,12 @@
                 <p>安全监测数据</p>
             </div>
             <div class="safety_right_content">
-                <div class="safety_right_item" v-for="item in safetyRightData">
+                <div class="safety_right_item" v-for="item in safeMonitor">
                     <div class="safety_right_title">
                         <span>{{item.name}}</span>
+                        <span>(</span>
+                        <span>{{item.actMethod}}</span>
+                        <span>)</span>
                         <img src="../assets/img/3/2.png" alt="">
                     </div>
                     <!-- 横向柱状图 -->
@@ -412,170 +415,25 @@ export default {
     name: 'Safety',
     data() {
         return {
-            activeIndex: '1',
-            DiscloseData: [
-                {
-                    index: '1',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '2',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '3',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '4',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '5',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '6',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '7',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '8',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                }, {
-                    index: '9',
-                    name: '交底名称',
-                    profession: '专业',
-                    state: '交底状态',
-                    accepted: '已接受交底人',
-                    unaccepted: '未接受交底人',
-                },
-            ],
-            RectificationData: [
-                {
-                    index: '1',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '2',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '3',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '4',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '5',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '6',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '7',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '8',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                }, {
-                    index: '9',
-                    name: '整改单名称',
-                    state: '整改状态',
-                    time: '整改时间',
-                    type: '问题类型',
-                },
-            ],
-            safetyRightData: [
-                {
-                    id: 'safety1',
-                    name: '外架荷载数据（超载报警发短信）',
-                    time: ['02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20'],
-                    value: [73, 68, 10, 30, 30, 20, 10]
-                },
-                {
-                    id: 'safety2',
-                    name: '高支模架子荷载（超载报警）',
-                    time: ['02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20'],
-                    value: [20, 10, 68, 73, 68, 10, 30]
-
-                },
-                {
-                    id: 'safety3',
-                    name: '卸料平台荷载（超载报警）',
-                    time: ['02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20'],
-                    value: [10, 30, 73, 20, 10, 68, 10,]
-
-                },
-                {
-                    id: 'safety4',
-                    name: '高支模架子荷载（超载报警）',
-                    time: ['02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20'],
-                    value: [68, 30, 73, 30, 10, 73, 68]
-                },
-            ]
+            safeTell: [],
+            safeTellDataAna: {},
+            safeReform: [],
+            safeReformDataAna: {},
+            safeMonitor: [],
         }
     },
     mounted() {
-        this.count_echarts();
-        this.radar_echarts();
-        // 中下
-        this.radar_echarts();
-        this.question_type_echarts();
-        this.execution_effect_echarts();
-        this.safety_problem_echarts();
-        // 右边
-        this.safety_right_bar_echarts();
+
+        // 安全交底
+        this.safeTell_data();
+        //安全交底-数据分析
+        this.safeTellDataAna_data();
+        //安全整改
+        this.safeReform_data();
+        //安全整改-数据统计
+        this.safeReformDataAna_data();
+        //安全监测数据
+        this.safeMonitor_data();
     },
     methods: {
         tableRowClassName(index) {
@@ -626,7 +484,7 @@ export default {
                                 color: '#7C97AD'
                             },
                         },
-                        data: ['02-14', '02-15', '02-16', '02-17', '02-18'],
+                        data: this.safeTellDataAna.workerList
                     }
                 ],
                 yAxis: [
@@ -653,14 +511,14 @@ export default {
                 ],
                 series: [
                     {
-                        name: '交底次数',
+                        name: '',
                         type: 'bar',
                         itemStyle: {
                             normal: {
                                 color: '#80f4fe',
                             }
                         },
-                        data: [73, 68, 10, 30, 20]
+                        data: this.safeTellDataAna.tellTimesList
                     }
                 ]
             };
@@ -668,6 +526,13 @@ export default {
         },
         // 雷达图
         radar_echarts() {
+            var radar_name_list = [];
+            this.safeTellDataAna.workerList.map(item => {
+                var obj = {};
+                obj.name = item;
+                obj.max = 100;
+                radar_name_list.push(obj);
+            })
             var mychart = echarts.init(document.getElementById("radar"));
             var option = {
                 tooltip: {},
@@ -704,18 +569,11 @@ export default {
                             type: "solid",
                         }
                     },
-                    indicator: [
-                        { name: 'ales', max: 6500, },
-                        { name: 'Administration', max: 16000 },
-                        { name: 'Information', max: 30000 },
-                        { name: 'Customer', max: 38000 },
-                        { name: 'Development', max: 52000 },
-                        { name: 'Marketing', max: 25000 }
-                    ],
+                    indicator: radar_name_list,
 
                 },
                 series: [{
-                    name: '预算',
+                    name: '交底率',
                     type: 'radar',
                     symbolSize: 2, // 拐点的大小
                     areaStyle: {
@@ -742,8 +600,8 @@ export default {
                     },
                     data: [
                         {
-                            value: [4300, 10000, 28000, 35000, 50000, 19000],
-                            name: '预算分配（Allocated Budget）'
+                            value: this.safeTellDataAna.tellPercentList,
+                            name: '交底率'
                         }
                     ]
                 }]
@@ -791,7 +649,7 @@ export default {
                                 color: '#7C97AD'
                             },
                         },
-                        data: ['02-14', '02-15', '02-16', '02-17', '02-18', '02-19', '02-20', '02-21', '02-22', '02-23', '02-24'],
+                        data: this.safeReformDataAna.typeList
                     }
                 ],
                 yAxis: [
@@ -818,27 +676,34 @@ export default {
                 ],
                 series: [
                     {
-                        name: '交底次数',
+                        name: '',
                         type: 'bar',
                         itemStyle: {
                             normal: {
                                 color: '#80f4fe',
                             }
                         },
-                        data: [73, 68, 73, 68, 10, 30, 20, 10, 30, 20, 10]
+                        data: this.safeReformDataAna.typeTimesList
                     }
                 ]
             };
             mychart.setOption(option, true);
-
         },
         // 中下-左边饼图-执行效果
         execution_effect_echarts() {
+            var stateNumList = [];
+            this.safeReformDataAna.stateList.map((item, index) => {
+                var obj = {
+                    name: item,
+                    value: this.safeReformDataAna.stateNumList[index],
+                };
+                stateNumList.push(obj)
+            });
             var mychart = echarts.init(document.getElementById("execution_effect"));
             var option = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    formatter: "{b} : {c} ({d}%)"
                 },
                 grid: {
                     top: '5%',
@@ -863,7 +728,7 @@ export default {
                         fontSize: 8
 
                     },
-                    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+                    data: this.safeReformDataAna.stateList
                 },
                 color: ['#35ddf7', '#31cb9a', '#f4de48', '#ea6c6c', '#e68060', '#4877e2', '#ea6c6c', '#2ebf97'],
                 series: [
@@ -872,13 +737,14 @@ export default {
                         type: 'pie',
                         radius: '55%',
                         center: ['35%', '50%'],
-                        data: [
-                            { value: 335, name: '直接访问' },
-                            { value: 310, name: '邮件营销' },
-                            { value: 234, name: '联盟广告' },
-                            { value: 135, name: '视频广告' },
-                            { value: 1548, name: '搜索引擎' }
-                        ],
+                        // data: [
+                        //     { value: 335, name: '直接访问' },
+                        //     { value: 310, name: '邮件营销' },
+                        //     { value: 234, name: '联盟广告' },
+                        //     { value: 135, name: '视频广告' },
+                        //     { value: 1548, name: '搜索引擎' }
+                        // ],
+                        data: stateNumList,
                         label: {
                             fontSize: 8,
                         },
@@ -904,11 +770,19 @@ export default {
         },
         // 中下-右边饼图-安全问题
         safety_problem_echarts() {
+            var typeTimesList = [];
+            this.safeReformDataAna.typeList.map((item, index) => {
+                var obj = {
+                    name: item,
+                    value: this.safeReformDataAna.typeTimesList[index],
+                };
+                typeTimesList.push(obj)
+            });
             var mychart = echarts.init(document.getElementById("safety_problem"));
             var option = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    formatter: "{b} : {c} ({d}%)"
                 },
                 grid: {
                     top: '5%',
@@ -933,22 +807,16 @@ export default {
                         fontSize: 8
 
                     },
-                    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+                    data: this.safeReformDataAna.typeList
                 },
                 color: ['#35ddf7', '#31cb9a', '#f4de48', '#ea6c6c', '#e68060', '#4877e2', '#ea6c6c', '#2ebf97'],
                 series: [
                     {
-                        name: '访问来源',
+                        name: '',
                         type: 'pie',
                         radius: '55%',
                         center: ['35%', '50%'],
-                        data: [
-                            { value: 335, name: '直接访问' },
-                            { value: 310, name: '邮件营销' },
-                            { value: 234, name: '联盟广告' },
-                            { value: 135, name: '视频广告' },
-                            { value: 1548, name: '搜索引擎' }
-                        ],
+                        data: typeTimesList,
                         label: {
                             fontSize: 8,
                         },
@@ -974,52 +842,30 @@ export default {
         },
         // 右边-横向柱状图
         safety_right_bar_echarts() {
-            this.safetyRightData.map(function (item) {
-                console.log(item);
-                var mychart = echarts.init(document.getElementById(item.id));
-                var option = {
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '10%',
-                        top: '3%',
-                        containLabel: true
-                    },
-                    tooltip: {
-                        show: "true",
-                        trigger: 'axis',
-                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
-                    xAxis: {
-                        type: 'value',
-                        axisTick: { show: false },
-                        axisLine: {
-                            show: false,
-                            lineStyle: {
-                                color: 'rgba(255,255,255,.2)',
+            this.safeMonitor.forEach(item => {
+                //把动态获取ID的操作放到this.$nextTick的回调中执行即可
+                this.$nextTick(() => {
+                    var mychart = echarts.init(document.getElementById(item.id));
+                    var option = {
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '10%',
+                            top: '3%',
+                            containLabel: true
+                        },
+                        tooltip: {
+                            show: "true",
+                            trigger: 'axis',
+                            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                             }
                         },
-                        axisLabel: {
-                            color: '#fff',
-                        },
-                        splitLine: {
-                            show: true,
-                            interval: 'auto', //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
-                            maxInterval: 3600 * 24 * 1000,
-                            lineStyle: {
-                                color: '#204D79'
-                            }
-                        },
-                    },
-                    yAxis: [
-                        {
-                            type: 'category',
+                        xAxis: {
+                            type: 'value',
                             axisTick: { show: false },
                             axisLine: {
-                                show: true,
-
+                                show: false,
                                 lineStyle: {
                                     color: 'rgba(255,255,255,.2)',
                                 }
@@ -1027,45 +873,142 @@ export default {
                             axisLabel: {
                                 color: '#fff',
                             },
-                            data: item.time
-                        }
-                    ],
-                    series: [
-                        {
-                            name: item.name,
-                            type: 'bar',
-                            yAxisIndex: 0,
-                            itemStyle: {
-                                normal: {
-                                    show: true,
-                                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                                        offset: 0,
-                                        color: '#6621d7'
-                                    }, {
-                                        offset: 0.8,
-                                        color: '#26defd'
-                                    }], false),
-                                    barBorderRadius: 50,
-                                    borderWidth: 0,
-                                    borderColor: '#333',
-                                    label: {
-                                        show: true,
-                                        position: 'right',
-                                        textStyle: {
-                                            color: 'white'
-                                        }
-                                    }
+                            splitLine: {
+                                show: true,
+                                interval: 'auto', //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+                                maxInterval: 3600 * 24 * 1000,
+                                lineStyle: {
+                                    color: '#204D79'
                                 }
                             },
-                            barGap: '0%',
-                            barCategoryGap: '50%',
-                            data: item.value
-                        }
-                    ]
-                };
-                mychart.setOption(option, true);
+                        },
+                        yAxis: [
+                            {
+                                type: 'category',
+                                axisTick: { show: false },
+                                axisLine: {
+                                    show: true,
+
+                                    lineStyle: {
+                                        color: 'rgba(255,255,255,.2)',
+                                    }
+                                },
+                                axisLabel: {
+                                    color: '#fff',
+                                },
+                                data: item.pointList
+                            }
+                        ],
+                        series: [
+                            {
+                                name: item.name,
+                                type: 'bar',
+                                yAxisIndex: 0,
+                                itemStyle: {
+                                    normal: {
+                                        show: true,
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                            offset: 0,
+                                            color: '#6621d7'
+                                        }, {
+                                            offset: 0.8,
+                                            color: '#26defd'
+                                        }], false),
+                                        barBorderRadius: 50,
+                                        borderWidth: 0,
+                                        borderColor: '#333',
+                                        label: {
+                                            show: true,
+                                            position: 'right',
+                                            textStyle: {
+                                                color: 'white'
+                                            }
+                                        }
+                                    }
+                                },
+                                barGap: '0%',
+                                barCategoryGap: '50%',
+                                data: item.weightList
+                            }
+                        ]
+                    };
+                    mychart.setOption(option, true);
+                })
             })
-        }
+        },
+        // 安全交底
+        safeTell_data() {
+            this.$axios.get('/safeManager/safeTell')
+                .then(response => {
+                    if (response.data.res == 'SUCCESS') {
+                        this.safeTell = response.data.data;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        //安全交底-数据分析
+        safeTellDataAna_data() {
+            this.$axios.get('/safeManager/safeTellDataAna')
+                .then(response => {
+                    if (response.data.res == 'SUCCESS') {
+                        this.safeTellDataAna = response.data.data;
+                        this.count_echarts();
+                        this.radar_echarts();
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        //安全整改
+        safeReform_data() {
+            this.$axios.get('/safeManager/safeReform')
+                .then(response => {
+                    if (response.data.res == 'SUCCESS') {
+                        this.safeReform = response.data.data;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        //安全整改-数据统计
+        safeReformDataAna_data() {
+            this.$axios.get('/safeManager/safeReformDataAna')
+                .then(response => {
+                    if (response.data.res == 'SUCCESS') {
+                        this.safeReformDataAna = response.data.data;
+                        this.question_type_echarts();
+                        this.execution_effect_echarts();
+                        this.safety_problem_echarts();
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        //安全监测数据
+        safeMonitor_data() {
+            this.$axios.get('/safeManager/safeMonitor')
+                .then(response => {
+                    console.log(response);
+                    if (response.data.res == 'SUCCESS') {
+                        response.data.data.map(function (item, index) {
+                            item.id = 'safety' + index;
+                            console.log(item.id);
+                        });
+                        this.safeMonitor = response.data.data;
+                        this.safety_right_bar_echarts();
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+
+
     }
 }
 </script>

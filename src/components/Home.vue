@@ -19,11 +19,10 @@
                 </div>
             </div>
             <div class="home_top_mid item">
-                <!-- <img src="../assets/img/1/mid_bg.jpeg" alt=""> -->
-                <img :src="picUrl" alt="">
-                <!-- <div class="img_box"> -->
-                <!-- <img class="img_box" src="www.biaima.com.cn/bs_test/index/picture/Building.png" alt=""> -->
-                <!-- </div> -->
+                <div class="player">
+                    <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions" @play="onPlayerPlay($event)" @pause="onPlayerPause($event)">
+                    </video-player>
+                </div>
             </div>
             <div class="home_top_right item">
                 <div class="container">
@@ -86,7 +85,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="home_bom_mid home_bom_item">
                 <div class="home_bom_title">劳动力情况</div>
@@ -184,13 +182,9 @@
                 </div>
             </div>
         </div>
-        <!-- <img src="www.biaima.com.cn/bs_test/index/picture/Building.png" width="200" height="200" alt=""> -->
     </div>
 </template>
 <style  lang="less">
-@media screen and (min-width: 1930px) {
-  @import "../common/css/home/homebg.less";
-}
 @media screen and (max-width: 1920px) {
   @import "../common/css/home/home.less";
 }
@@ -198,13 +192,10 @@
 
 <script>
 var echarts = require('echarts');
-// import 'www.biaima.com.cn/bs_test/index/picture/Building.png';
+import { videoPlayer } from 'vue-video-player';
 export default {
     components: {
-        // Vue.component('cdn-img', {
-        //   props: ['src'],
-        //   template: `<img :src="'http://awesome.cdn.com/' + src" /> `
-        // })
+        videoPlayer
     },
     name: 'home',
     data() {
@@ -214,10 +205,33 @@ export default {
             members: [],
             dynamic: [],
             safe: [],
-            picUrl: ""
+            picUrl: "",
+            playerOptions: {
+                autoplay: false, //如果true,浏览器准备好时开始回放。
+                muted: false, // 默认情况下将会消除任何音频。
+                loop: true, // 导致视频一结束就重新开始。
+                preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+                language: 'zh-CN',
+                aspectRatio: '16:10', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+                fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
+                sources: [{
+                    type: "video/mp4",
+                    src: "/static/常熟北部医院20190424.mp4" //你的视频地址（必填）
+                }],
+                poster: "/static/mid_bg.jpeg", //你的封面地址
+                // width: document.documentElement.clientWidth,
+                notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+                controlBar: {
+                    timeDivider: true,
+                    durationDisplay: true,
+                    remainingTimeDisplay: false,
+                    fullscreenToggle: true  //全屏按钮
+                }
+            }
         }
     },
     mounted() {
+
         // 获取工程简介
         this.abstract_getData();
         // 环境监测
@@ -240,6 +254,12 @@ export default {
         }
     },
     methods: {
+        onPlayerPlay(player) {
+            // alert("play");
+        },
+        onPlayerPause(player) {
+            // alert("pause");
+        },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
         },
@@ -553,6 +573,9 @@ export default {
                             { 'name': '总承建单位', 'content': response.data.data.mainOrg }
                         ]
                     }
+                    setTimeout(() => {
+                        this.abstract_getData();
+                    }, 60000)
                 })
                 .catch(error => {
                     console.log(error);
@@ -565,6 +588,9 @@ export default {
                     if (response.data.res == 'SUCCESS') {
                         this.environment = response.data.data;
                         this.environment_echarts();
+                        setTimeout(() => {
+                            this.environment_getData();
+                        }, 60000)
                     }
                 })
                 .catch(error => {
@@ -590,6 +616,9 @@ export default {
                         this.members.objNumsTotal = objNumsTotal;
                         this.members.actualNumsTotal = actualNumsTotal;
                         this.members.attendance = (actualNumsTotal / objNumsTotal) * 100;
+                        setTimeout(() => {
+                            this.members_getData();
+                        }, 60000)
                     }
                 })
                 .catch(error => {
@@ -604,9 +633,10 @@ export default {
             })
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
-                        console.log(response.data.data);
                         this.picUrl = 'data:image/png;base64,' + response.data.data.picB64;
-                        console.log(this.picUrl);
+                        setTimeout(() => {
+                            this.mainPicture_getData();
+                        }, 60000)
                     }
                 })
                 .catch(error => {
@@ -619,6 +649,9 @@ export default {
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
                         this.dynamic = response.data.data;
+                        setTimeout(() => {
+                            this.dynamic_getData();
+                        }, 60000)
                     }
                 })
                 .catch(error => {
@@ -634,15 +667,17 @@ export default {
                         this.safe.map((item, index) => {
                             item.id = 'dt' + index;
                         })
-                        // console.log(response.data.data);
+                        console.log(response.data.data);
                         this.safe_echarts();
+                        setTimeout(() => {
+                            this.safe_getData();
+                        }, 60000)
                     }
                 })
                 .catch(error => {
                     console.log(error);
                 })
-        },
-
+        }
     }
 }
 </script>

@@ -26,7 +26,7 @@
 @item_mid_w: 226px;
 @item_mid_h: 52px;
 
-.app {
+.index {
     width: @width;
     height: @height;
     overflow: auto;
@@ -34,6 +34,7 @@
     background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     padding: 0 @home_padding;
+    position: relative;
 
     .title {
         height: @title_height;
@@ -88,15 +89,15 @@
                 height: @nav_top_item;
                 font-family: SourceHanSansCN-Bold;
                 font-size: @nav_size;
-                font-weight: normal;
+                font-weight: 500;
                 font-stretch: normal;
                 line-height: @nav_top_item;
                 letter-spacing: @nav_item_l;
-                color: #00fcff;
-                background: linear-gradient(to top bottom,
-                    rgba(0, 141, 188, 0.8),
-                    rgba(0, 239, 251, 0.8),
+                background-image: linear-gradient(rgba(0, 141, 188, 0.7),
+                    rgba(0, 239, 251, 0.7),
                     rgba(0, 255, 236, 0.8));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             .nav_top_right {
@@ -105,11 +106,21 @@
                 height: @nav_top_item;
                 font-family: SourceHanSansCN-Bold;
                 font-size: @nav_size;
-                font-weight: normal;
+                font-weight: 500;
                 font-stretch: normal;
                 line-height: @nav_top_item;
                 letter-spacing: @nav_item_l;
-                color: #00fcff;
+                background-image: linear-gradient(rgba(0, 141, 188, 0.7),
+                    rgba(0, 239, 251, 0.7),
+                    rgba(0, 255, 236, 0.8));
+                // background: -webkit-gradient(linear,
+                //     left top,
+                //     right top,
+                //     from(rgba(0, 141, 188, 0.8)),
+                //     color-stop(0.7, rgba(0, 239, 251, 0.8)),
+                //     to(rgba(0, 255, 236, 0.8)));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
         }
 
@@ -118,7 +129,7 @@
             height: @nav_item_h;
             margin-right: @nav_item_w_r;
             position: relative;
-            display: inline-block;
+            float: left;
 
             li {
                 float: left;

@@ -12,7 +12,8 @@ module.exports = {
     proxyTable: {
       // 跨域设置
       "/api": {
-        target: "http://www.biaima.com.cn/bs_test",
+        // target: "http://www.biaima.com.cn:5005/api",
+        target: "http://www.biaima.com.cn/api",
         changeOrigin: true,
         pathRewrite: {
           "^/api": "",
