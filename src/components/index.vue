@@ -108,7 +108,6 @@ export default {
 
     },
     created() {
-        console.log(this.$route);
         switch (this.$route.name) {
             case 'index':
                 this.state = {
@@ -372,7 +371,6 @@ export default {
         },
         getFullCreeen() {
             this.n++;
-            console.log(this.n);
             this.n % 2 == 0 ? this.outFullCreeen(document) : this.inFullCreeen(document.documentElement);
             this.n % 2 == 0 ? this.fun_text = '全屏' : this.fun_text = '退出';
             this.n % 2 == 0 ? this.full_if = true : this.full_if = false;
@@ -407,7 +405,6 @@ export default {
             this.$axios.get('/Index/Common')
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
-                        console.log(response);
                         this.Common = response.data
                     }
                 })
@@ -415,8 +412,6 @@ export default {
                     console.log(error);
                 })
         }
-
-
     }
 }
 </script>
@@ -437,9 +432,5 @@ export default {
       vertical-align: middle;
     }
   }
-}
-
-@media screen and (min-width: 1930px) {
-  //   @import "common/css/app/appbg.less";
 }
 </style>

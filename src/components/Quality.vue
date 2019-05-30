@@ -234,22 +234,17 @@
           }
         }
         .table_content::-webkit-scrollbar-track-piece {
-          //滚动条凹槽的颜色，还可以设置边框属性
           border-radius: 10px;
           background-color: rgba(7, 48, 95, 0.88);
         }
         .table_content::-webkit-scrollbar {
-          /*滚动条整体样式*/
-          //滚动条的宽度
           width: 5px;
           height: 1px;
         }
         .table_content::-webkit-scrollbar-thumb {
-          //滚动条的设置
           background-color: rgba(117, 193, 239, 0.73);
           border-radius: 10px;
           height: 24px;
-          //   opacity: 0.73;
         }
         .table_content::-webkit-scrollbar-thumb:hover {
           background-color: #bbb;
@@ -340,7 +335,6 @@
       margin: 0 33px;
       .mid_bom_content {
         position: relative;
-        // border: 1px solid red;
         .select {
           color: #fff;
           width: 80px;
@@ -451,22 +445,17 @@
         }
       }
       .safety_right_content::-webkit-scrollbar-track-piece {
-        //滚动条凹槽的颜色，还可以设置边框属性
         border-radius: 10px;
         background-color: rgba(7, 48, 95, 0.88);
       }
       .safety_right_content::-webkit-scrollbar {
-        /*滚动条整体样式*/
-        //滚动条的宽度
         width: 5px;
         height: 1px;
       }
       .safety_right_content::-webkit-scrollbar-thumb {
-        //滚动条的设置
         background-color: rgba(117, 193, 239, 0.73);
         border-radius: 10px;
         height: 24px;
-        //   opacity: 0.73;
       }
       .safety_right_content::-webkit-scrollbar-thumb:hover {
         background-color: #bbb;
@@ -611,7 +600,6 @@ export default {
                         },
                         axisLine: {
                             lineStyle: {
-                                // 设置x轴颜色
                                 color: '#7C97AD'
                             },
                         },
@@ -629,7 +617,7 @@ export default {
                         },
                         splitLine: {
                             show: true,
-                            interval: 'auto', //0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+                            interval: 'auto',
                             maxInterval: 3600 * 24 * 1000,
                             lineStyle: {
                                 color: '#204D79'
@@ -676,9 +664,8 @@ export default {
                 },
 
                 radar: {
-                    // shape: 'circle',
                     radius: "60%",
-                    splitNumber: 4, // 雷达图圈数设置
+                    splitNumber: 4,
                     splitArea: {
                         areaStyle: {
                             color: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0)'],
@@ -706,7 +693,7 @@ export default {
                 series: [{
                     name: '交底率',
                     type: 'radar',
-                    symbolSize: 2, // 拐点的大小
+                    symbolSize: 2,
                     areaStyle: {
                         normal: {
                             color: {
@@ -715,12 +702,9 @@ export default {
                                 }, {
                                     offset: 1, color: 'rgba(255, 229, 126,.14)' // 100% 处的颜色
                                 }],
-                                global: false // 缺省为 false
+                                global: false
                             }
                         }
-                    },
-                    label: {
-                        // show: true
                     },
                     itemStyle: {
                         color: '',
@@ -776,7 +760,6 @@ export default {
                         },
                         axisLine: {
                             lineStyle: {
-                                // 设置x轴颜色
                                 color: '#7C97AD'
                             },
                         },
@@ -869,18 +852,10 @@ export default {
                         type: 'pie',
                         radius: '55%',
                         center: ['35%', '50%'],
-                        // data: [
-                        //     { value: 335, name: '直接访问' },
-                        //     { value: 310, name: '邮件营销' },
-                        //     { value: 234, name: '联盟广告' },
-                        //     { value: 135, name: '视频广告' },
-                        //     { value: 1548, name: '搜索引擎' }
-                        // ],
                         data: stateNumList,
                         label: {
                             fontSize: 8,
                         },
-                        //此处是改变折线的长度
                         labelLine: {
                             normal: {
                                 smooth: .1,
@@ -1155,8 +1130,6 @@ export default {
                         type: 'value',
                         position: 'right',
                         splitNumber: 6,
-                        //  min: 0,
-                        // max: 0,
                         axisTick: {
                             show: false
                         },
@@ -1295,7 +1268,6 @@ export default {
         qualityTell_data() {
             this.$axios.get('/qualityManager/qualityTell')
                 .then(response => {
-                    // console.log(response);
                     if (response.data.res == 'SUCCESS') {
                         this.qualityTell = response.data.data;
                     }
@@ -1308,7 +1280,6 @@ export default {
         qualityTellDataAna_data() {
             this.$axios.get('/qualityManager/qualityTellDataAna')
                 .then(response => {
-                    // console.log(response);
                     if (response.data.res == 'SUCCESS') {
                         this.qualityTellDataAna = response.data.data;
                         this.count_echarts();
@@ -1371,8 +1342,6 @@ export default {
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
                         this.safeMonitor = response.data.data;
-                        console.log(response.data);
-                        console.log(this.safeMonitor);
                         this.right_top_echarts()
                         this.right_mid_echarts()
                         this.right_bom_echarts()

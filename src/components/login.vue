@@ -25,7 +25,6 @@
     </div>
 </template>
 <style  lang="less">
-// @media screen and (max-width: 1920px) {
 .login {
   width: 1920px;
   height: 1080px;
@@ -162,9 +161,6 @@
     }
   }
 }
-// }
-// @media screen and (min-width: 1930px) {
-// }
 </style>
 <script>
 export default {
@@ -187,11 +183,6 @@ export default {
     },
     methods: {
         login() {
-            // 记住密码
-            console.log(this.user);
-            // this.$router.push({
-            //     path: '/index'
-            // });
             var obj = {
                 username: this.user.username,
                 password: this.user.password,
@@ -202,10 +193,8 @@ export default {
                 data: this.$qs.stringify(obj),
             })
                 .then(response => {
-                    console.log(response);
                     if (response.data.res == 'SUCCESS') {
                         if (this.user.state) {
-                            //传入账号名，密码，和保存天数3个参数
                             this.setCookie(this.user.username, this.user.password, 7);
                         } else {
                             this.clearCookie();
@@ -222,27 +211,23 @@ export default {
                 })
         },
         CheckItem(item) {
-            console.log(item);
             this.user.state = !item;
         },
         //设置cookie
         setCookie(c_name, c_pwd, exdays) {
-            var exdate = new Date(); //获取时间
-            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); //保存的天数
-            //字符串拼接cookie
+            var exdate = new Date();
+            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
             window.document.cookie = "userName" + "=" + c_name + ";path=/;expires=" + exdate.toGMTString();
             window.document.cookie = "userPwd" + "=" + c_pwd + ";path=/;expires=" + exdate.toGMTString();
         },
         //读取cookie
         getCookie: function () {
             if (document.cookie.length > 0) {
-                var arr = document.cookie.split('; '); //这里显示的格式需要切割一下自己可输出看下
-                console.log(arr);
+                var arr = document.cookie.split('; ');
                 for (var i = 0; i < arr.length; i++) {
-                    var arr2 = arr[i].split('='); //再次切割
-                    //判断查找相对应的值
+                    var arr2 = arr[i].split('=');
                     if (arr2[0] == 'userName') {
-                        this.user.username = arr2[1]; //保存到保存数据的地方
+                        this.user.username = arr2[1];
                     } else if (arr2[0] == 'userPwd') {
                         this.user.password = arr2[1];
                     }
@@ -251,7 +236,7 @@ export default {
         },
         //清除cookie
         clearCookie: function () {
-            this.setCookie("", "", -1); //修改2值都为空，天数为负1天就好了
+            this.setCookie("", "", -1);
         }
     }
 }

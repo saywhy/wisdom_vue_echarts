@@ -249,17 +249,10 @@ export default {
         numFilter(value) {
             // 截取当前数据到小数点后两位
             let realVal = parseFloat(value).toFixed(2)
-            // num.toFixed(2)获取的是字符串
             return parseFloat(realVal)
         }
     },
     methods: {
-        onPlayerPlay(player) {
-            // alert("play");
-        },
-        onPlayerPause(player) {
-            // alert("pause");
-        },
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
         },
@@ -308,7 +301,6 @@ export default {
                     },
                     axisLine: {
                         lineStyle: {
-                            // 设置x轴颜色
                             color: '#7C97AD'
                         },
                     },
@@ -351,7 +343,6 @@ export default {
             mychart.setOption(option, true);
             window.onresize = function () {
                 mychart.resize();
-                console.log(' attendance');
             }
         },
         // 柱状图-考勤
@@ -433,7 +424,6 @@ export default {
                                         color: 'white'
                                     }
                                 }
-
                             }
                         },
                         data: this.members.objNums
@@ -460,7 +450,6 @@ export default {
             mychart.setOption(option, true);
             window.onresize = function () {
                 mychart.resize();
-                console.log('environment');
             }
         },
         // 折线图-力距
@@ -502,7 +491,6 @@ export default {
                             },
                             axisLine: {
                                 lineStyle: {
-                                    // 设置x轴颜色
                                     color: '#7C97AD'
                                 },
                             },
@@ -532,7 +520,7 @@ export default {
                             {
                                 name: '#1吊塔',
                                 type: 'line',
-                                symbol: 'circle',     //设定为实心点
+                                symbol: 'circle',
                                 hoverAnimation: false,
                                 areaStyle: {
                                     normal: {
@@ -546,7 +534,7 @@ export default {
                                     }
                                 },
                                 animation: false,
-                                symbolSize: 0,   //设定实心点的大小
+                                symbolSize: 0,
                                 data: item.momentForceList
                             }
                         ]
@@ -602,7 +590,6 @@ export default {
             this.$axios.get('/index/members')
                 .then(response => {
                     if (response.data.res == 'SUCCESS') {
-                        // console.log(response.data.data);
                         this.members = response.data.data;
                         this.attendance_echarts();
                         var objNumsTotal = 0;
@@ -667,7 +654,6 @@ export default {
                         this.safe.map((item, index) => {
                             item.id = 'dt' + index;
                         })
-                        console.log(response.data.data);
                         this.safe_echarts();
                         setTimeout(() => {
                             this.safe_getData();

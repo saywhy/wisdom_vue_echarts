@@ -205,22 +205,17 @@
           }
         }
         .table_content::-webkit-scrollbar-track-piece {
-          //滚动条凹槽的颜色，还可以设置边框属性
           border-radius: 10px;
           background-color: rgba(7, 48, 95, 0.88);
         }
         .table_content::-webkit-scrollbar {
-          /*滚动条整体样式*/
-          //滚动条的宽度
           width: 5px;
           height: 1px;
         }
         .table_content::-webkit-scrollbar-thumb {
-          //滚动条的设置
           background-color: rgba(117, 193, 239, 0.73);
           border-radius: 10px;
           height: 24px;
-          //   opacity: 0.73;
         }
         .table_content::-webkit-scrollbar-thumb:hover {
           background-color: #bbb;
@@ -381,22 +376,17 @@
         }
       }
       .safety_right_content::-webkit-scrollbar-track-piece {
-        //滚动条凹槽的颜色，还可以设置边框属性
         border-radius: 10px;
         background-color: rgba(7, 48, 95, 0.88);
       }
       .safety_right_content::-webkit-scrollbar {
-        /*滚动条整体样式*/
-        //滚动条的宽度
         width: 5px;
         height: 1px;
       }
       .safety_right_content::-webkit-scrollbar-thumb {
-        //滚动条的设置
         background-color: rgba(117, 193, 239, 0.73);
         border-radius: 10px;
         height: 24px;
-        //   opacity: 0.73;
       }
       .safety_right_content::-webkit-scrollbar-thumb:hover {
         background-color: #bbb;
@@ -575,21 +565,18 @@ export default {
                 series: [{
                     name: '交底率',
                     type: 'radar',
-                    symbolSize: 2, // 拐点的大小
+                    symbolSize: 2,
                     areaStyle: {
                         normal: {
                             color: {
                                 colorStops: [{
-                                    offset: 0, color: 'rgba(255, 229, 126, .8)' // 0% 处的颜色
+                                    offset: 0, color: 'rgba(255, 229, 126, .8)'
                                 }, {
-                                    offset: 1, color: 'rgba(255, 229, 126,.14)' // 100% 处的颜色
+                                    offset: 1, color: 'rgba(255, 229, 126,.14)'
                                 }],
-                                global: false // 缺省为 false
+                                global: false
                             }
                         }
-                    },
-                    label: {
-                        // show: true
                     },
                     itemStyle: {
                         color: '',
@@ -737,13 +724,6 @@ export default {
                         type: 'pie',
                         radius: '55%',
                         center: ['35%', '50%'],
-                        // data: [
-                        //     { value: 335, name: '直接访问' },
-                        //     { value: 310, name: '邮件营销' },
-                        //     { value: 234, name: '联盟广告' },
-                        //     { value: 135, name: '视频广告' },
-                        //     { value: 1548, name: '搜索引擎' }
-                        // ],
                         data: stateNumList,
                         label: {
                             fontSize: 8,
@@ -820,7 +800,6 @@ export default {
                         label: {
                             fontSize: 8,
                         },
-                        //此处是改变折线的长度
                         labelLine: {
                             normal: {
                                 smooth: .1,
@@ -843,7 +822,6 @@ export default {
         // 右边-横向柱状图
         safety_right_bar_echarts() {
             this.safeMonitor.forEach(item => {
-                //把动态获取ID的操作放到this.$nextTick的回调中执行即可
                 this.$nextTick(() => {
                     var mychart = echarts.init(document.getElementById(item.id));
                     var option = {
